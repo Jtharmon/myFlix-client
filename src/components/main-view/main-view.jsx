@@ -1,40 +1,38 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 
 export const MainView = () => {
 
-    const [movies, setMovies] = useState([
-        {
-            id: 1,
-            title: "Silence of the Lambs",
-            image:
-                "https://m.media-amazon.com/images/M/MV5BNjNhZTk0ZmEtNjJhMi00YzFlLWE1MmEtYzM1M2ZmMGMwMTU4XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg",
-            director: "Jonathan Demme"
-        },
-        {
-            id: 2,
-            title: "Trainwreck",
-            image:
-                "https://m.media-amazon.com/images/I/51Vttr6XpQL._AC_.jpg",
-            director: "Judd Apatow"
-        },
-        {
-            id: 3,
-            title: "Tenet",
-            image:
-                "https://m.media-amazon.com/images/I/91BnDPpVcBL.jpg",
-            director: "Christopher Nolan"
-        }
-    ]);
+    const [movies, setMovies] = useState([]);
 
     const [selectedMovie, setSelectedMovie] = useState(null);
+    useEffect(() => {
+        fetch("http://localhost:5000/movie-api/movies")
+            .then((response) => response.json())
+            .then((data) => {
+                const Movieapi = data.map((doc) => {
+                    console.log(doc);
+                    return {
+                        id: doc.Movieid,
+                        title: doc.Title,
+                        image: doc.ImagePath,
+                        director: doc.Director.Name
+                    };
+                });
+
+                setMovies(Movieapi);
+            });
+    }, []);
+
 
     if (selectedMovie) {
         return <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />;
-        
+
     }
 
     if (movies.length === 0) {
@@ -47,8 +45,9 @@ export const MainView = () => {
                 <MovieCard
                     movie={movie}
                     onMovieClick={(newSelectedMovie) => {
-                    setSelectedMovie(newSelectedMovie);}
-                }/>
+                        setSelectedMovie(newSelectedMovie);
+                    }
+                    } />
             ))}
         </div>
     );
