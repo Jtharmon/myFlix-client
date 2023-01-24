@@ -9,14 +9,23 @@ import { LoginView } from "../login-view/login-view";
 
 export const MainView = () => {
 
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    const storedToken = localStorage.getItem("token");
     const [movies, setMovies] = useState([]);
     const [selectedMovie, setSelectedMovie] = useState(null);
     const [User, setUser] = useState(null);
     const [token, setToken] = useState(null);
     useEffect(() => {
-        fetch("http://localhost:5000/movie-api/movies")
+        if (!token) {
+            return;
+        }
+        fetch("http://localhost:5000/movie-api/movies", {
+            headers: { Authorization: 'Bearer ${token}' },
+        })
+
             .then((response) => response.json())
-            .then((data) => {
+            .then((movies) => {
+                setMovies(movies);
                 const Movieapi = data.map((doc) => {
                     console.log(doc);
                     return {
@@ -29,7 +38,7 @@ export const MainView = () => {
 
                 setMovies(Movieapi);
             });
-    }, []);
+    }, [token]);
 
     if (!user) {
         return (
@@ -71,4 +80,4 @@ export const MainView = () => {
     );
 };
 
-<button onClick={() => { setUser(null); }}>Logout</button>
+<button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>Logout</button>
