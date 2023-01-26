@@ -16,7 +16,7 @@ export const SignupView = () => {
             Birthday: birthday
         };
 
-        fetch("SIGNUP_URL", {
+        fetch("http://localhost:5000/movie-api/user", {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
