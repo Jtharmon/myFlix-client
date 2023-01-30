@@ -1,4 +1,5 @@
 import React from "react";
+import { useState} from "react";
 
 export const LoginView = ({ onLoggedIn }) => {
     const [username, setUsername] = useState("");
@@ -20,22 +21,22 @@ export const LoginView = ({ onLoggedIn }) => {
             .then((response) => response.json())
             .then((data) => {
                 console.log("Login response: ", data);
-                if (dat.user) {
+                if (data.user) {
+                    localStorage.setItem("user", JSON.stringify(data.user));
+                    localStorage.setItem("token", data.token);
                     onLoggedIn(data.user, data.token);
                 } else {
                     alert("no such user");
+                }
+                if (response.ok) {
+                    onLoggedIn(username);
+                } else {
+                    alert("Login failed");
                 }
             })
             .catch((e) => {
                 alert("Something went wrong")
             });
-
-
-            if (response.ok) {
-                onLoggedIn(username);
-            } else {
-                alert("Login failed");
-            }
         };
 
 
