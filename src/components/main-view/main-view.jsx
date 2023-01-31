@@ -7,6 +7,7 @@ import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
+import { Row, Col } from "react-bootstrap";
 
 export const MainView = () => {
 
@@ -41,45 +42,47 @@ export const MainView = () => {
             });
     }, [token]);
 
-    if (!user) {
         return (
-            <>
-            <LoginView
-                onLoggedIn={(user, token) => {
-                    setUser(user);
-                    setToken(token);
-                }} />
-            < SignupView />
-                  </>
-        );
-}
+            <Row>
+                {!user ? (
+                    <>
+                        <LoginView
+                            onLoggedIn={(user, token) => {
+                                setUser(user);
+                                setToken(token);
+                            }} />
+                        < SignupView />
+                    </>
+                ) :
+                    selectedMovie ? (
+                        <MovieView
+                            movie={selectedMovie}
+                            onBackClick={() => setSelectedMovie(null)}
+                        />
+                            
+                ) :
+                movies.length === 0 ? (
+                    <div>The list is empty!</div>
+                ) : 
+                (
+                    <div>
+                        {movies.map((movie) => (
+                            <MovieCard
+                                movie={movie}
+                                onMovieClick={(newSelectedMovie) => {
+                                    setSelectedMovie(newSelectedMovie);
+                                }}
+                            />
+                        ))}
+                    </div>
 
+                )
 
-    if (!user) {
-        return <LoginView />; 
-    }
+                
 
+                };
 
-    if (selectedMovie) {
-        return <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />;
-
-    }
-
-    if (movies.length === 0) {
-        return <div>The list is empty!</div>;
-    }
-
-    return (
-        <div>
-            {movies.map((movie) => (
-                <MovieCard
-                    movie={movie}
-                    onMovieClick={(newSelectedMovie) => {
-                        setSelectedMovie(newSelectedMovie);
-                    }
-                    } />
-            ))}
-        </div>
+    </Row>
     );
 };
 
