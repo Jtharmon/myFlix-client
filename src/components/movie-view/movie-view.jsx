@@ -1,5 +1,8 @@
 import { MovieCard } from "../movie-card/movie-card";
 import PropTypes from 'prop-types';
+import './movie-view.scss';
+import createUtilityClassName from "../../../node_modules/react-bootstrap/esm/createUtilityClasses";
+import { Button } from "react-bootstrap";
 
 
 export const MovieView = ({ movie, onBackClick }) => {
@@ -16,13 +19,16 @@ export const MovieView = ({ movie, onBackClick }) => {
                 <span>Director: </span>
                 <span>{movie.director}</span>
             </div>
-            <button
-                onClick={() => {
-                    onBackClick();
-                }}
+
+            <Button
+                onClick={onBackClick}
+                className="back-button"
+                style={{ cursor: "pointer" }}
             >
                 Back
-            </button>
+            </Button>
+
+
         </div>
     );
 };
