@@ -7,7 +7,6 @@ import { MainView } from "./src/components/main-view/main-view";
 
 import {Container} from 'react-bootstrap';
 
-import 
 
 import "./index.scss";
 
