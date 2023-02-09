@@ -4,7 +4,6 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Row, Col } from "react-bootstrap";
-
 import avatar from "./person-circle.svg";
 import MovieCard from "../movie-card/movie-card";
 
@@ -39,7 +38,7 @@ const ProfileView = ({
         };
         try {
             const response = await fetch(
-                `https://myflixapi.smartcoder.dev/v1/users/${user.username}`,
+                `http://movie-api1.herokuapp.com/movie-api/users/${user.username}`,
                 {
                     method: "PUT",
                     body: JSON.stringify(userData),
@@ -65,7 +64,7 @@ const ProfileView = ({
     const handleDeleteUser = async () => {
         try {
             const response = await fetch(
-                `https://myflixapi.smartcoder.dev/v1/users/${user.username}`,
+                `http://movie-api1.herokuapp.com/movie-api/users/${user.username}`,
                 {
                     method: "DELETE",
                     headers: {
