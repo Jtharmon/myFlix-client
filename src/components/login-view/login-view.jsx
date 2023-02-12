@@ -1,6 +1,8 @@
 import React from "react";
 import { useState} from "react";
 import { Form, Button, Col, Row } from "react-bootstrap";
+import { Navbar, Container, Nav } from "react-bootstrap";
+
 
 
 export const LoginView = ({ onLoggedIn }) => {

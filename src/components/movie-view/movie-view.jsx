@@ -3,9 +3,16 @@ import PropTypes from 'prop-types';
 import './movie-view.scss';
 import createUtilityClassName from "../../../node_modules/react-bootstrap/esm/createUtilityClasses";
 import { Button } from "react-bootstrap";
+import { useParams } from "react-router";
+import { Link } from "react-router-dom";
+import { Navbar, Container, Nav } from "react-bootstrap";
 
 
 export const MovieView = ({ movie, onBackClick }) => {
+    const { movieId } = useParams();
+
+    const movie = movie.find((b) => m.id === movieId);
+
     return (
         <div>
             <div>
