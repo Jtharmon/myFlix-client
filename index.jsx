@@ -10,14 +10,17 @@ import {Container} from 'react-bootstrap';
 
 import "./index.scss";
 
+import { store } from "./redux/store";
+import { Provider } from 'react-redux';
+
 // Main component (will eventually use all the others)
 const MyFlixApplication = () => {
     return (
-        <div className="my-flix">
+        <Provider className="my-flix">
             <Container>
                 <MainView></MainView>
             </Container>
-        </div>
+        </Provider>
     );
 };
 

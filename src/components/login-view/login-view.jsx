@@ -33,7 +33,7 @@ export const LoginView = ({ onLoggedIn }) => {
                     alert("no such user");
                 }
                 if (response.ok) {
-                    onLoggedIn(username);
+                    dispatch(setUser(username));
                 } else {
                     alert("Login failed");
                 }
