@@ -18,7 +18,7 @@ import { setMovies } from "../../redux/reducers/movies";
 
 export const MainView = () => {
 
-    const movies = useSelector((state) => state.movies);
+    const movies = useSelector((state) => state.movies.list);
     const user = useSelector ((state) => state.user);
 
     const dispatch = useDispatch();
@@ -96,7 +96,7 @@ export const MainView = () => {
                     <>
                         {!user ? (
                             <Navigate to="/login" replace />
-                        ) : movie.length === 0 ? (
+                        ) : <MovieList />} === 0 ? (
                             <Col>the list is empty!</Col>
                         ) : (
                             <>
@@ -106,7 +106,7 @@ export const MainView = () => {
                                     </Col>
                                 ))}
                             </>
-                        )}
+                        )
                     </>
                 }
              />
