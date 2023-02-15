@@ -10,9 +10,18 @@ import { SignupView } from "../signup-view/signup-view";
 import { Row, Col } from "react-bootstrap";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Navbar, Container, Nav } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
+import { setMovies } from "../../redux/reducers/movies";
+
+
 
 
 export const MainView = () => {
+
+    const movies = useSelector((state) => state.movies.list);
+    const user = useSelector ((state) => state.user);
+
+    const dispatch = useDispatch();
 
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const storedToken = localStorage.getItem("token");
@@ -40,9 +49,9 @@ export const MainView = () => {
                     };
                 });
 
-                setMovies(Movieapi);
+                dispatch (setMovies(Movieapi));
             });
-    }, [token]);
+    }, []);
 
     return (
             <BrowserRouter>
@@ -50,9 +59,7 @@ export const MainView = () => {
                <Routes>
                 <Route
                         path="/signup"
-                        element={!user ? (<Navigate to="/" />) : (<Col md={5} >
-                                       <SignupView />
-                                       </Col>)}
+                        element={!user ? (<Navigate to="/" />) : ("")}
                 />
                 <Route
                     path="/login"
@@ -61,7 +68,7 @@ export const MainView = () => {
                             {user ? (
                                 <Navigate to="/" />
                             ) : (
-                                <><Col md={5} /><LoginView onLoggedIn={(user) => setUser(user)} /></>
+                                <><LoginView onLoggedIn={(user) => setUser(user)} /></>
                             )}
                     </>
 
@@ -89,7 +96,7 @@ export const MainView = () => {
                     <>
                         {!user ? (
                             <Navigate to="/login" replace />
-                        ) : movie.length === 0 ? (
+                        ) : <MovieList />} === 0 ? (
                             <Col>the list is empty!</Col>
                         ) : (
                             <>
@@ -99,7 +106,7 @@ export const MainView = () => {
                                     </Col>
                                 ))}
                             </>
-                        )}
+                        )
                     </>
                 }
              />

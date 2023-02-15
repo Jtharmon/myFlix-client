@@ -3,8 +3,14 @@ import { Navbar, Container, Nav } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import { Link } from "react-router-dom";
 import myFlixLogo from "./MyFlix-logo.png";
+import { useSelector, useDispatch } from "react-redux";
+import { setUser } from "../../redux/reducers/user";
 
-const NavigationBar = ({ username, onLoggedOut }) => {
+
+const NavigationBar = () => {
+    const user = useSelector((state) => state.user);
+    const dispatch = useDispatch();
+
     return (
         <Navbar
             expand="lg"
@@ -41,7 +47,9 @@ const NavigationBar = ({ username, onLoggedOut }) => {
                                 <Nav.Link as={Link} to="/">
                                     Home
                                 </Nav.Link>
-                                <Nav.Link onClick={onLoggedOut}>Logout</Nav.Link>
+                                <Nav.Link onClick={() => dispatch(setUser(null))}>
+                                    Logout
+                                    </Nav.Link>
                             </React.Fragment>
                         )}
                     </Nav>
