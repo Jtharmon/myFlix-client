@@ -10,7 +10,7 @@ import {Container} from 'react-bootstrap';
 
 import "./index.scss";
 
-import { store } from "./redux/store";
+import { store } from "./src/redux/store";
 import { Provider } from 'react-redux';
 
 // Main component (will eventually use all the others)
