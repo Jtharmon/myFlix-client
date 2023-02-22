@@ -14,3 +14,4 @@ export const { setUser } = userSlice.actions;
 
 export default userSlice.reducer;
 
+export { userReducer } from "./redux/reducers/user/user.js";
