@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { BookCard } from "../book-card/book-card";
-import { BooksFilter } from "../books-filter/books-filter";
+import { MovieCard } from "../movie-card/movie-card";
+import { MoviesFilter } from "../movies-filter/movies-filter";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 

@@ -1,26 +1,15 @@
-import { createRoot } from 'react-dom/client';
+import { createRoot } from "react-dom/client";
+import React from "react";
+import Container from "react-bootstrap/Container";
 
-//Importing Mainview
-import { MainView } from "./src/components/main-view/main-view";
+import * as bootstrap from "bootstrap";
+import MainView from "./src/components/main-view/main-view";
 
-// Import statement to indicate that you need to bundle `./index.scss`
-
-import {Container} from 'react-bootstrap';
-
-
-import "./index.scss";
-
-import { store } from "./src/redux/store";
-import { Provider } from 'react-redux';
-
-// Main component (will eventually use all the others)
 const MyFlixApplication = () => {
     return (
-        <Provider className="my-flix">
-            <Container>
-                <MainView></MainView>
-            </Container>
-        </Provider>
+        <Container fluid className="min-vh-100">
+            <MainView />
+        </Container>
     );
 };
 
@@ -30,5 +19,3 @@ const root = createRoot(container);
 
 // Tells React to render your app in the root DOM element
 root.render(<MyFlixApplication />);
-
-
