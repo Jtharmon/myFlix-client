@@ -8,10 +8,10 @@ import { Link } from "react-router-dom";
 import { Navbar, Container, Nav } from "react-bootstrap";
 
 
-export const MovieView = ({ movie, onBackClick }) => {
+export const MovieView = ({ m, onBackClick }) => {
     const { movieId } = useParams();
 
-    const movie = movie.find((b) => m.id === movieId);
+    const movie = m.find((b) => m.id === movieId);
 
     return (
         <div>
