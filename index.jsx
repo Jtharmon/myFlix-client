@@ -3,7 +3,7 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 
 import * as bootstrap from "bootstrap";
-import MainView from "./src/components/main-view/main-view";
+import { MainView } from "./src/components/main-view/main-view";
 
 const MyFlixApplication = () => {
     return (
