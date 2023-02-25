@@ -24,7 +24,6 @@ export const MainView = () => {
 
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const storedToken = localStorage.getItem("token");
-    const [user, setUser] = useState(null);
     const [token, setToken] = useState(null);
     useEffect(() => {
         if (!token) {
