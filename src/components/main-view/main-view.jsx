@@ -11,7 +11,7 @@ import { Row, Col } from "react-bootstrap";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { setMovies } from "../movies-list/movies-list";
+import { MoviesList } from "../movies-list/movies-list";
 
 
 
