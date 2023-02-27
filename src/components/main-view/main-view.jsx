@@ -17,13 +17,13 @@ import { MoviesList } from "../movies-list/movies-list";
 
 export const MainView = () => {
 
-    const movies = useSelector((state) => state.movies.list);
-    const user = useSelector ((state) => state.user);
 
     const dispatch = useDispatch();
 
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const storedToken = localStorage.getItem("token");
+    const [movies, setMovies] = useState([]);
+    const [user, setUser] = useState(null);
     const [token, setToken] = useState(null);
     useEffect(() => {
         if (!token) {
