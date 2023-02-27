@@ -18,7 +18,6 @@ import { MoviesList } from "../movies-list/movies-list";
 export const MainView = () => {
 
 
-    const dispatch = useDispatch();
 
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const storedToken = localStorage.getItem("token");
