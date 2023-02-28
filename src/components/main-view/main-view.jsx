@@ -86,29 +86,29 @@ export const MainView = () => {
                     </>
                 }
             />
-            <Route
-                path="/"
-                element={
-                    <>
-                        {!user ? (
-                            <Navigate to="/login" replace />
-                        ) : <MovieList />} === 0 ? (
-                            <Col>the list is empty!</Col>
-                        ) : (
+                    <Route
+                        path="/"
+                        element={
                             <>
-                                {movie.map((movie) => (
-                                    <Col className="mb-4" key={movie.id} md={3}>
-                                        <MovieCard movie={movie} />
-                                    </Col>
-                                ))}
+                                {!user ? (
+                                    <Navigate to="/login" replace />
+                                ) : movies.length === 0 ? (
+                                    <Col>the list is empty!</Col>
+                                ) : (
+                                    <>
+                                        {movies.map((movie) => (
+                                            <Col className="mb-4" key={movie.id} md={3}>
+                                                <MovieCard movie={movie} />
+                                            </Col>
+                                        ))}
+                                    </>
+                                )}
                             </>
-                        )
-                    </>
-                }
-             />
-        </Routes>
-       </Row >
-      </BrowserRouter >
+                        }
+                    />
+                </Routes>
+            </Row >
+        </BrowserRouter >
     );
 };
 
