@@ -64,7 +64,7 @@ export const MainView = () => {
                             {user ? (
                                 <Navigate to="/" />
                             ) : (
-                                <><LoginView onLoggedIn={(user) => setUser(user)} /></>
+                                    <><><LoginView onLoggedIn={(user) => setUser(user)} /></><SignupView /></>
                             )}
                     </>
 
