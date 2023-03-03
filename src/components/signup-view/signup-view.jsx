@@ -25,6 +25,7 @@ export const SignupView = () => {
         })
             .then(response => response.json())
             .then((response) => {
+                console.log(response)
                 if (response.created) {
                     alert("Signup successful");
                     window.location.reload();
