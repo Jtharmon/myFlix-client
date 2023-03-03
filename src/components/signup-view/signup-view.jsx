@@ -10,10 +10,10 @@ export const SignupView = () => {
         event.preventDefault();
 
         const data = {
-            Username: username,
-            Password: password,
-            Email: email,
-            Birthday: birthday
+            username: username,
+            password: password,
+            email: email,
+            birthday: birthday
         };
 
         fetch("http://movie-api1.herokuapp.com/movie-api/users", {
@@ -22,14 +22,20 @@ export const SignupView = () => {
             headers: {
                 "Content-Type": "application/json"
             }
-        }).then((response) => {
-            if (response.ok) {
-                alert("Signup successful");
-                window.location.reload();
-            } else {
+        })
+            .then(response => response.json())
+            .then((response) => {
+                if (response.success) {
+                    alert("Signup successful");
+                    window.location.reload();
+                } else {
+                    alert("Signup failed");
+                }
+            })
+            .catch((error) => {
+                console.log("Signup failed:", error);
                 alert("Signup failed");
-            }
-        });
+            });
     };
 
     return (
@@ -75,4 +81,3 @@ export const SignupView = () => {
         </form>
     );
 };
-
