@@ -23,7 +23,7 @@ export const SignupView = () => {
                 "Content-Type": "application/json"
             }
         })
-            .then(response => response.json())
+            //.then(response => response.json())
             .then((response) => {
                 console.log(response)
                 if (response.created) {
