@@ -18,7 +18,7 @@ export const LoginView = ({ onLoggedIn }) => {
         fetch("https://myFlix/account/login.json", {
             method: "POST",
             headers: {
-                "Content Type": "application/json"
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(data)
         })
