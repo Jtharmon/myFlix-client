@@ -17,7 +17,6 @@ export const MainView = () => {
     const [signedUpSuccess, setSignedUpSuccess] = useState(false);
     const [user, setUser] = useState(storedUser || null);
     const [token, setToken] = useState(storedToken || null);
-    const dispatch = useDispatch();
 
     useEffect(() => {
         if (!token) {
