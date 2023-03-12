@@ -1,40 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
-
-
-import { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Navbar, Container, Nav, Row, Col } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
-import { Row, Col } from "react-bootstrap";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { Navbar, Container, Nav } from "react-bootstrap";
-import { useSelector, useDispatch } from "react-redux";
 import { MoviesList } from "../movies-list/movies-list";
 
-
-
 export const MainView = () => {
-
-
-
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const storedToken = localStorage.getItem("token");
     const [movies, setMovies] = useState([]);
-    const [user, setUser] = useState(null);
-    const [token, setToken] = useState(null);
+    const [username, setUsername] = useState("");
+    const [signedUpSuccess, setSignedUpSuccess] = useState(false);
+    const [user, setUser] = useState(storedUser || null);
+    const [token, setToken] = useState(storedToken || null);
+    const dispatch = useDispatch();
+
     useEffect(() => {
         if (!token) {
             return;
         }
         fetch("http://localhost:5000/movie-api/movies", {
-            headers: { Authorization: 'Bearer ${token}' },
+            headers: { Authorization: `Bearer ${token}` },
         })
-
             .then((response) => response.json())
-            .then((movies) => {
-                setMovies(movies);
+            .then((data) => {
                 const Movieapi = data.map((doc) => {
                     console.log(doc);
                     return {
@@ -44,48 +37,43 @@ export const MainView = () => {
                         director: doc.Director.Name
                     };
                 });
-
-                dispatch (setMovies(Movieapi));
+                setMovies(Movieapi);
             });
-    }, []);
+    }, [token]);
 
     return (
-            <BrowserRouter>
+        <BrowserRouter>
             <Row className="justify-content-md-center">
-               <Routes>
-                <Route
+                <Routes>
+                    <Route
                         path="/signup"
-                        element={!user ? (<Navigate to="/" />) : ("")}
-                />
-                <Route
-                    path="/login"
-                    element={
-                        <>
-                            {user ? (
-                                <Navigate to="/" />
-                            ) : (
-                                    <><><LoginView onLoggedIn={(user) => setUser(user)} /></><SignupView /></>
-                            )}
-                    </>
-
-                }
-               />
-            <Route
-                path="/movies/:movieId"
-                element={
-                    <>
-                        {!user ? (
-                            <Navigate to="/login" replace />
-                        ) : movie.length === 0 ? (
-                            <Col>The list is empty!</Col>
-                        ) : (
-                            <Col md={8}>
-                                <MovieView movies={movies} />
-                            </Col>
-                        )}
-                    </>
-                }
-            />
+                        element={
+                            <React.Fragment>
+                                {username || signedUpSuccess ? (
+                                    <Navigate to="/" />
+                                ) : (
+                                    <SignupView onSignedUp={() => setSignedUpSuccess(true)} />
+                                )}
+                            </React.Fragment>
+                        }
+                    />
+                    <Route
+                        path="/login"
+                        element={
+                            <React.Fragment>
+                                {username ? (
+                                    <Navigate to="/" />
+                                ) : (
+                                    <LoginView
+                                        onLoggedIn={(username, token) => {
+                                            setUsername(username);
+                                            setToken(token);
+                                        }}
+                                    />
+                                )}
+                            </React.Fragment>
+                        }
+                    />
                     <Route
                         path="/"
                         element={
@@ -107,8 +95,8 @@ export const MainView = () => {
                         }
                     />
                 </Routes>
-            </Row >
-        </BrowserRouter >
+            </Row>
+        </BrowserRouter>
     );
 };
 

@@ -78,7 +78,7 @@ export const SignupView = () => {
                     required
                 />
             </label>
-            <button type="submit">Submit</button>
+            <button type="submit">SignUp Submit</button>
         </form>
     );
 };
