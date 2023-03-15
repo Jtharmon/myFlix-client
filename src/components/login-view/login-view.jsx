@@ -12,10 +12,10 @@ export const LoginView = ({ onLoggedIn }) => {
         //this prevents the default behavior of the form which is to reload the entire page
         event.preventDefault();
         const data = {
-            access: username,
-            secret: password
+            Username: username,
+            Password: password
         };
-        fetch("https://myFlix/account/login.json", {
+        fetch("https://movie-api1.herokuapp.com/movie-api/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
