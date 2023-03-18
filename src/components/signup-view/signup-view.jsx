@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 export const SignupView = () => {
     const [username, setUsername] = useState("");
@@ -26,7 +26,7 @@ export const SignupView = () => {
             //.then(response => response.json())
             .then((response) => {
                 console.log(response)
-                if (response.created) {
+                if (response.status === 201) {
                     alert("Signup successful");
                     window.location.reload();
                 } else {
@@ -41,9 +41,10 @@ export const SignupView = () => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <label>
+            <label htmlFor="username-input">Username:
                 Username:
                 <input
+                    id="username-input"
                     type="text"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
