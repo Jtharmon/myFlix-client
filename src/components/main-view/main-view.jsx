@@ -22,7 +22,7 @@ export const MainView = () => {
         if (!token) {
             return;
         }
-        fetch("http://localhost:5000/movie-api/movies", {
+        fetch("https://movie-api1.herokuapp.com/movie-api/movies", {
             headers: { Authorization: `Bearer ${token}` },
         })
             .then((response) => response.json())
@@ -30,10 +30,10 @@ export const MainView = () => {
                 const Movieapi = data.map((doc) => {
                     console.log(doc);
                     return {
-                        id: doc.Movieid,
-                        title: doc.Title,
-                        image: doc.ImagePath,
-                        director: doc.Director.Name
+                        _id: doc._id,
+                        Title: doc.Title,
+                        Image: doc.ImagePath,
+                        Director: doc.Director.Name
                     };
                 });
                 setMovies(Movieapi);

@@ -8,27 +8,27 @@ import { Link } from "react-router-dom";
 import { Navbar, Container, Nav } from "react-bootstrap";
 
 
-export const MovieView = ({ m, onBackClick }) => {
+export const MovieView = ({ m }) => {
     const { movieId } = useParams();
 
-    const movie = m.find((b) => m.id === movieId);
+    const movie = m.find((b) => m._id === movieId);
 
     return (
         <div>
             <div>
-                <img src={movie.image} />
+                <img src={movie.Image} />
             </div>
             <div>
                 <span>Title: </span>
-                <span>{movie.title}</span>
+                <span>{movie.Title}</span>
             </div>
             <div>
                 <span>Director: </span>
-                <span>{movie.director}</span>
+                <span>{movie.Director}</span>
             </div>
 
             <Button
-                onClick={onBackClick}
+                //onClick={}
                 className="back-button"
                 style={{ cursor: "pointer" }}
             >
