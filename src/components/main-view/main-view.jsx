@@ -13,8 +13,6 @@ export const MainView = () => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const storedToken = localStorage.getItem("token");
     const [movies, setMovies] = useState([]);
-    const [username, setUsername] = useState("");
-    const [signedUpSuccess, setSignedUpSuccess] = useState(false);
     const [user, setUser] = useState(storedUser || null);
     const [token, setToken] = useState(storedToken || null);
 
@@ -28,7 +26,7 @@ export const MainView = () => {
             .then((response) => response.json())
             .then((data) => {
                 const Movieapi = data.map((doc) => {
-                    console.log(doc);
+                    console.log("doc", doc);
                     return {
                         _id: doc._id,
                         Title: doc.Title,
@@ -37,6 +35,7 @@ export const MainView = () => {
                     };
                 });
                 setMovies(Movieapi);
+                console.log("API", Movieapi);
             });
     }, [token]);
 
@@ -48,10 +47,10 @@ export const MainView = () => {
                         path="/signup"
                         element={
                             <React.Fragment>
-                                {username || signedUpSuccess ? (
+                                {user ? (
                                     <Navigate to="/" />
                                 ) : (
-                                    <SignupView onSignedUp={() => setSignedUpSuccess(true)} />
+                                    <SignupView />
                                 )}
                             </React.Fragment>
                         }
@@ -60,12 +59,12 @@ export const MainView = () => {
                         path="/login"
                         element={
                             <React.Fragment>
-                                {username ? (
+                                {user ? (
                                     <Navigate to="/" />
                                 ) : (
                                     <LoginView
-                                        onLoggedIn={(username, token) => {
-                                            setUsername(username);
+                                        onLoggedIn={(user, token) => {
+                                            setUser(user);
                                             setToken(token);
                                         }}
                                     />
@@ -73,6 +72,24 @@ export const MainView = () => {
                             </React.Fragment>
                         }
                     />
+                    <Route
+                        path="/movies/:movieId"
+                        element={
+                            <>
+                                {!user ? (
+                                    <Navigate to="/login" replace />
+                                ) : movies.length === 0 ? (
+                                        <Col>the list is empty!</Col>
+                                ) : (
+                                    <MovieView
+                                        movies={movies}
+                                        
+                                    />
+                                )}
+                            </>
+                        }
+                    />
+
                     <Route
                         path="/"
                         element={
@@ -83,8 +100,8 @@ export const MainView = () => {
                                     <Col>the list is empty!</Col>
                                 ) : (
                                     <>
-                                        {movies.map((movie) => (
-                                            <Col className="mb-4" key={movie.id} md={3}>
+                                        {movies.map(movie => (
+                                            <Col className="mb-4" key={movie._id} md={3}>
                                                 <MovieCard movie={movie} />
                                             </Col>
                                         ))}
@@ -93,10 +110,14 @@ export const MainView = () => {
                             </>
                         }
                     />
+
                 </Routes>
             </Row>
         </BrowserRouter>
     );
 };
+
+
+
 
 <button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>Logout</button>

@@ -8,11 +8,11 @@ import { Link } from "react-router-dom";
 import { Navbar, Container, Nav } from "react-bootstrap";
 
 
-export const MovieView = ({ m }) => {
+export const MovieView = ({ movies }) => {
     const { movieId } = useParams();
+    const movie = movies.find(m => m.id === movieId);
 
-    const movie = m.find((b) => m._id === movieId);
-
+    
     return (
         <div>
             <div>
@@ -27,13 +27,16 @@ export const MovieView = ({ m }) => {
                 <span>{movie.Director}</span>
             </div>
 
-            <Button
-                //onClick={}
-                className="back-button"
-                style={{ cursor: "pointer" }}
-            >
-                Back
-            </Button>
+
+            <Link to={"/"}>
+                <Button
+                    //onClick={}
+                    className="back-button"
+                    style={{ cursor: "pointer" }}
+                >
+                    Back
+                </Button>
+            </Link>
 
 
         </div>
