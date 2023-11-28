@@ -15,7 +15,7 @@ export const LoginView = ({ onLoggedIn }) => {
         };
 
         fetch(
-            "https://movie-api1.herokuapp.com/login?Username=" +
+            "https://http://54.234.239.246:8080/movie-api/login?Username=" +
             data.access +
             "&Password=" +
             data.secret,

@@ -20,7 +20,7 @@ export const MainView = () => {
         if (!token) {
             return;
         }
-        fetch("https://movie-api1.herokuapp.com/movie-api/movies", {
+        fetch("https://http://54.234.239.246:8080/movie-api/movie-api/movies", {
             headers: { Authorization: `Bearer ${token}` },
         })
             .then((response) => response.json())

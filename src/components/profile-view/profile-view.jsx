@@ -38,7 +38,7 @@ const ProfileView = ({
         };
         try {
             const response = await fetch(
-                `http://movie-api1.herokuapp.com/movie-api/users/${user.username}`,
+                `http://http://54.234.239.246:8080/movie-api/movie-api/users/${user.username}`,
                 {
                     method: "PUT",
                     body: JSON.stringify(userData),
